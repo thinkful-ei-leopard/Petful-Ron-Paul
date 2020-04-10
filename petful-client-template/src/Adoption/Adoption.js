@@ -8,6 +8,7 @@ export class Adoption extends Component {
     users: [],
     dogs: [],
     cats: [],
+    value: '',
   };
 
   componentDidMount() {
@@ -23,6 +24,14 @@ export class Adoption extends Component {
         })
         .catch((error) => {});
     });
+  }
+
+  handleSignUp() {}
+
+  handleAdopt() {}
+
+  handleChange(event) {
+    this.setState({ value: event.target.value });
   }
 
   render() {
@@ -55,7 +64,12 @@ export class Adoption extends Component {
         <div className="waitlist-form-container">
           <form className="waitlist-form">
             <label htmlFor="adopter-name">Add Name: </label>
-            <input id="adopter-name" type="text" />
+            <input
+              id="adopter-name"
+              type="text"
+              value={this.state.value}
+              onChange={this.handleChange}
+            />
             <button type="submit">Enter</button>
           </form>
         </div>
