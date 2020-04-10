@@ -44,11 +44,13 @@ class Queue {
 
   all() {
     // Return all items in the queue.
-    while(this.node.next !== null){
-      this.first = this.first.next;
-      return this.first.value;
+    let items = [];
+    let currentNode = this.first;
+    while(currentNode !== null){
+      items.push(currentNode.value);
+      currentNode = currentNode.next;
     }
-    // maybe store tehm together then return?
+    return items;
   }
 }
 

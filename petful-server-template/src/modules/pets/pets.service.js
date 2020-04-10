@@ -16,17 +16,28 @@ store.dogs.forEach(dog => pets.dogs.enqueue(dog));
 
 module.exports = {
   getFirstPet() {
-    // Returns the next pet at the front of the queue
+    // Returns the first pet(s) at the front of the queue
     const cat = pets.cats.show();
     const dog = pets.dogs.show();
     return [cat, dog];
   },
-  get() {
+  getAllPets() {
     // Return the pets next in line to be adopted.
-    let cats = 
+    const cats = pets.cats.all();
+    const dogs = pets.dogs.all();
+    return {
+      cats,
+      dogs
+    };
   },
 
   dequeue(type) {
     // Remove a pet from the queue.
+    if(type === 'cat'){
+      pets.cats.dequeue();
+    } 
+    else if(type === 'dogs'){
+      pets.dogs.dequeue();
+    }
   }
 };

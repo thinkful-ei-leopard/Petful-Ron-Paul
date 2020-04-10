@@ -9,7 +9,8 @@ const router = express.Router();
 router.get('/', (req, res, next) => {
   // Return all pets currently up for adoption.
   //TESTING THIS
-  return res.status(200).json(Pets.getFirstPet());
+  // return res.status(200).json(Pets.getFirstPet());
+  return res.status(200).json(Pets.getAllPets());
   
 });
 

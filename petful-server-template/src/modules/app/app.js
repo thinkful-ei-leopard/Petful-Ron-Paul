@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { NODE_ENV } = require('./config');
+const { NODE_ENV } = require('../../config');
 
 const app = express();
 
