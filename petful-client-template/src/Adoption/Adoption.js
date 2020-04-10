@@ -26,9 +26,13 @@ export class Adoption extends Component {
     });
   }
 
-  handleSignUp() {}
+  handleSignUp() {
 
-  handleAdopt() {}
+  }
+
+  handleAdopt() {
+    
+  }
 
   handleChange(event) {
     this.setState({ value: event.target.value });
