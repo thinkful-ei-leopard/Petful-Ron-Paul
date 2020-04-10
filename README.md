@@ -6,7 +6,7 @@ For EI petful project - React, Node, DSA
 ### Landing Page
 - when you go the '/' (FRONTEND) endpoint (landing page): 
 * GET a description of the adoption process: text explaination of how this process works
-* a meaningful picutre related to the description
+* a meaningful picture related to the description
 * needs a "Start Adoption" button that starts the adoption process
     * takes you to the endpoint for the adoption page
 
