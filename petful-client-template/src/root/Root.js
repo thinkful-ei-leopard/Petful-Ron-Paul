@@ -1,33 +1,19 @@
-import React from 'react';
-import { Router, Link } from 'react-router-dom';
-import './Root.scss';
+import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import Adoption from '../Adoption/Adoption'
+import LandingPage from '../LandingPage/LandingPage'
 
-function Root() {
-  return (
-    <div className="Root">
-      <h1 className="header">Welcome to Petful!</h1>
-
-      <img
-        className="dogcat"
-        src={require('../images/dogcat.jpg')}
-        alt="Dog Cat"
-      />
-
-      <p>
-        We operate on a{' '}
-        <span className="first-come">first-come, first-served</span> basis. If
-        you would like to adopt one of our furry friends, click the button below
-        and add your name to the adoption list! Cats and dogs who have been with
-        us the longest will be the first ones available for adoption.
-      </p>
-
-      <Link to="/adoption" className="adopt-button">
-        <p>
-        	Adopt Now!
-        </p>
-      </Link>
-    </div>
-  );
+export class Root extends Component {
+  render() {
+    return (
+      <div>
+        <Switch>
+        <Route exact path={'/'} component={LandingPage} />
+          <Route exact path={'/adoption'} component={Adoption} />
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default Root;

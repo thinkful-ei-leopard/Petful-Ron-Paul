@@ -1,0 +1,71 @@
+@import '../styles/_breakpoints.scss';
+@import '../styles/_variables.scss';
+
+.LandingPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.dogcat {
+  display: flex;
+  width: 300px;
+  margin: 0;
+  padding-bottom: 2rem;
+}
+
+.header {
+  font-size: 2rem;
+  font-family: Roboto Mono;
+  text-align: center;
+  color: #222;
+}
+
+p {
+  font-family: Arial;
+  font-size: 1rem;
+  line-height: 1.2rem;
+  color: var(--main);
+  margin: 0 auto;
+}
+
+.first-come {
+  font-style: italic;
+}
+
+.adopt-button {
+  text-align: center;
+  background-color: var(--green);
+  text-decoration: none;
+  margin: 2rem auto;
+  display: block;
+  width: 200px;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  border: 2px solid var(--main);
+}
+
+.adopt-button p {
+  color: rgb(206, 64, 194);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: Roboto Mono, monospace;
+}
+
+@include mobileLandscape {
+  .dogcat {
+    width: 400px;
+  }
+
+  .header {
+    font-size: 3rem;
+  }
+
+  p {
+    max-width: 80%;
+  }
+}

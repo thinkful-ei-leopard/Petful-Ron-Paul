@@ -1,0 +1,109 @@
+@import '../styles/_breakpoints.scss';
+@import '../styles/_variables.scss';
+
+.nav-bar {
+  width: 100%;
+  height: 50px;
+  background-color: var(--green);
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.home-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-family: Roboto Mono;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.pets-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@include mobileLandscape {
+  .pets-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+.cats-header,
+.dogs-header {
+  font-family: Roboto Mono;
+  font-size: 1.5rem;
+}
+
+p {
+  font-family: Arial;
+  font-size: 1rem;
+  line-height: 1.2rem;
+  color: var(--main);
+  margin: 0 auto;
+}
+
+.user-list {
+  margin: 0 auto;
+  display: flex;
+}
+
+.user-list li {
+  font-family: Roboto Mono;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  margin: 0 auto;
+  text-align: left;
+  padding: 0;
+}
+
+.waitlist {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.waitlist-header {
+  font-size: 1rem;
+  font-family: Roboto Mono;
+  margin: 0 auto 1rem;
+  text-decoration: underline;
+}
+
+.waitlist-form-container {
+  display: flex;
+  padding-bottom: 1rem;
+}
+
+.waitlist-form {
+  margin: 0 auto;
+}
+
+label {
+  font-family: Roboto Mono;
+}
+
+.intro-text {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  width: 80%;
+}
+
+@include tabletPortrait {
+  .intro-text {
+    width: 50%;
+  }
+}
