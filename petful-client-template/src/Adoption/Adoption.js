@@ -5,13 +5,15 @@ import config from '../config';
 
 export class Adoption extends Component {
   state = {
-    users: [],
+    people: [],
     dogs: [],
     cats: [],
     value: '',
+    loading: true,
   };
 
   componentDidMount() {
+
     Promise.all([
       fetch(`${config.API_ENDPOINT}/api/people`),
       fetch(`${config.API_ENDPOINT}/api/pets`),
@@ -20,25 +22,50 @@ export class Adoption extends Component {
       if (!petsRes.ok) return petsRes.json().then((e) => Promise.reject(e));
       return Promise.all([peopleRes.json(), petsRes.json()])
         .then(([people, pets]) => {
-          this.setState({ people, pets });
+          this.setState({
+            people,
+            cats: pets.cats,
+            dogs: pets.dogs,
+            loading: false
+          });
         })
         .catch((error) => {});
     });
+
+
+    console.log(this.state.cats);
   }
 
-  handleSignUp() {
+  handleSignUp = (e) => {
+    e.preventDefault();
+    console.log(this.state.cats)
+  };
 
-  }
+  handleAdopt = (e) => {
+    e.preventDefault();
 
-  handleAdopt() {
-    
-  }
+    fetch(`${config.API_ENDPOINT}/api/pets/`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+      },
+    })
+      .then(() => {
+        // this.setState({ loading: true });
+      })
+      .catch(() => {});
+  };
 
   handleChange(event) {
     this.setState({ value: event.target.value });
   }
 
   render() {
+    if (this.state.loading) {
+      return <></>;
+    }
+
+    const { cats } = this.state;
     return (
       <div className="Adoption">
         <div className="nav-bar">
@@ -74,16 +101,34 @@ export class Adoption extends Component {
               value={this.state.value}
               onChange={this.handleChange}
             />
-            <button type="submit">Enter</button>
+            <button type="submit" onClick={this.handleSignUp}>Enter</button>
           </form>
         </div>
 
         <main className="pets-container">
           <div className="cats-container">
             <h2 className="cats-header">Cats</h2>
+            <img src="" alt="" />
+            <div className="cat-info">
+              <p className="cat-name">name: {cats[0].name} </p>
+              <p className="cat-description">description: </p>
+              <p className="cat-age">age: </p>
+              <p className="cat-gender">gender: </p>
+              <p className="cat-breed">breed: </p>
+              <p className="cat-story">story: </p>
+            </div>
           </div>
           <div className="dogs-container">
             <h2 className="dogs-header">Dogs</h2>
+            <img src="" alt="" />
+            <div className="dog-info">
+              <p className="dog-name">name: </p>
+              <p className="dog-description">description: </p>
+              <p className="dog-age">age: </p>
+              <p className="dog-gender">gender: </p>
+              <p className="dog-breed">breed: </p>
+              <p className="dog-story">story: </p>
+            </div>
           </div>
         </main>
       </div>

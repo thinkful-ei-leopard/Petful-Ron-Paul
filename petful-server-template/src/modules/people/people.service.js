@@ -10,8 +10,13 @@ store.people.forEach(person => people.enqueue(person));
 // --------------------
 
 module.exports = {
-  get() {
+  getAllPeople() {
     // Return all people in the queue.
+    // MAY NEED TO CHANGE 'people'
+    const allPeople = people.all();
+    return {
+      allPeople
+    };
   },
 
   enqueue(person) {
