@@ -35,12 +35,21 @@ class Queue {
   }
 
   show() {
-    // Return the next item in the queue.
+    // Return the next item in the queue
+    if (this.first === null) {
+      return 'Cannot show the first item of an empty queue';
+    }
+    return this.first.value;
   }
 
   all() {
     // Return all items in the queue.
+    while(this.node.next !== null){
+      this.first = this.first.next;
+      return this.first.value;
+    }
+    // maybe store tehm together then return?
   }
 }
 
-module.exports = Queue
+module.exports = Queue;
