@@ -42,6 +42,7 @@ export class Adoption extends Component {
 
   handleSignUp = async (e, name) => {
     e.preventDefault();
+    this.setState({ name });
     // * POST NEW PERSON
     await fetch(`${config.API_ENDPOINT}/api/people`, {
       method: 'POST',
@@ -58,10 +59,30 @@ export class Adoption extends Component {
     this.startQueue();
   };
 
-  startQueue = () => {
-    return setInterval(() => {
-      this.handleAdopt('', '', true);
-    }, 5000);
+  // startQueue = () => {
+  //   const { name, people } = this.state;
+  //   if (name !== people.allPeople[0]) {
+  //     return setInterval(() => {
+  //       console.log(name, people.allPeople[0]);
+  //       this.handleAdopt('', '', true);
+  //       this.getPeopleAndPets();
+  //     }, 5000);
+  //   } else {
+  //     clearInterval();
+  //   }
+  // };
+
+  startQueue = async () => {
+    const { name, people } = this.state;
+    return await new Promise((resolve) => {
+      const interval = setInterval(() => {
+        console.log(name, people.allPeople[0]);
+        this.handleAdopt('', '', true);
+        if (name === people.allPeople[0]) {
+          clearInterval(interval);
+        }
+      }, 5000);
+    });
   };
 
   handleAdopt = async (e, type, both = false) => {
