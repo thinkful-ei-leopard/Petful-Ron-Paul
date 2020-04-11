@@ -57,7 +57,7 @@ export class Adoption extends Component {
   };
 
   handleSignUp = async (e, name) => {
-    e.preventDefault();
+    // e.preventDefault();
     const { fakePeople } = this.state;
     // * POST NEW PERSON
     await fetch(`${config.API_ENDPOINT}/api/people`, {
@@ -108,7 +108,6 @@ export class Adoption extends Component {
 
   handleAdopt = async (type, both = false) => {
     console.log(type, both);
-    // e.preventDefault();
     await fetch(`${config.API_ENDPOINT}/api/pets`, {
       method: 'DELETE',
       headers: {
@@ -123,7 +122,6 @@ export class Adoption extends Component {
   };
 
   handleChange = (event) => {
-    event.preventDefault();
     this.setState({ value: event.target.value });
   };
 
@@ -194,6 +192,7 @@ export class Adoption extends Component {
               <button
                 type="submit"
                 onClick={(e) => {
+                  e.preventDefault();
                   this.handleSignUp(e, this.state.value);
                   this.setState({ value: '' });
                 }}>
