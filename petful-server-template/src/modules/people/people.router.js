@@ -38,7 +38,7 @@ router.post('/', json, (req, res) => {
 
   // In case something doesn't get caught
   const person = `${name}`;
-  People.enqueue(this.serializeInput(person));
+  People.enqueue(person);
 
   return res.status(201).json(person);
 });
