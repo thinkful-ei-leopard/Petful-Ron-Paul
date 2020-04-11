@@ -54,12 +54,13 @@ export class Adoption extends Component {
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
+    this.getPeopleAndPets();
     this.startQueue();
   };
 
   startQueue = () => {
     return setInterval(() => {
-      this.handleAdopt('', true);
+      this.handleAdopt('', '', true);
     }, 5000);
   };
 
