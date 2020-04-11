@@ -17,31 +17,32 @@ router.delete('/', json, (req, res) => {
   // if 'both=true' is sent, it will remove a dog and a cat, plus the owner from their queues
 
   const { type, both } = req.body;
+  console.log(type, both)
   
   // check if "both" is TRUE first, if it is then do a  dequeue for both types individually
-  if(both === 'true'){
+  if(both){
     Pets.dequeue('cats');
     Pets.dequeue('dogs');
     People.dequeue();
     return res.status(204).send();
   }
 
-  // Validation
-  if(type == null || !type){
-    return res.status(400).json({
-      error: `Invalid 'type'`
-    });
-  }
-  if(typeof type !== 'string'){
-    return res.status(400).json({
-      error: `'type' must be a string`
-    });
-  }
-  if(type !== 'cats' || type !== 'dogs'){
-    return res.status(400).json({
-      error: `'type' must either be 'cats' or 'dogs'`
-    });
-  }
+  // // Validation
+  // if(type == null || !type){
+  //   return res.status(400).json({
+  //     error: `Invalid 'type'`
+  //   });
+  // }
+  // if(typeof type !== 'string'){
+  //   return res.status(400).json({
+  //     error: `'type' must be a string`
+  //   });
+  // }
+  // if(type !== 'cats' || type !== 'dogs'){
+  //   return res.status(400).json({
+  //     error: `'type' must either be 'cats' or 'dogs'`
+  //   });
+  // }
   
   // In case something doesn't get caught
   const petType = `${type}`;

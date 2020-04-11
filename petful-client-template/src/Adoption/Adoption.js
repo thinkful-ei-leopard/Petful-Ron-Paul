@@ -14,25 +14,31 @@ export class Adoption extends Component {
   };
 
   componentDidMount() {
+    this.getPeopleAndPets();
+  }
+
+  getPeopleAndPets = async () => {
     // get all people and pets on component
-    Promise.all([
+    // this.setState({ loading: true });
+    const [peopleRes, petsRes] = await Promise.all([
       fetch(`${config.API_ENDPOINT}/api/people`),
       fetch(`${config.API_ENDPOINT}/api/pets`),
-    ]).then(([peopleRes, petsRes]) => {
-      if (!peopleRes.ok) return peopleRes.json().then((e) => Promise.reject(e));
-      if (!petsRes.ok) return petsRes.json().then((e) => Promise.reject(e));
-      return Promise.all([peopleRes.json(), petsRes.json()])
-        .then(([people, pets]) => {
-          this.setState({
-            people,
-            cats: pets.cats,
-            dogs: pets.dogs,
-            loading: false,
-          });
-        })
-        .catch((error) => {});
-    });
-  }
+    ]);
+    if (!peopleRes.ok) return peopleRes.json().then((e) => Promise.reject(e));
+    if (!petsRes.ok) return petsRes.json().then((e_1) => Promise.reject(e_1));
+    try {
+      const [people, pets] = await Promise.all([
+        peopleRes.json(),
+        petsRes.json(),
+      ]);
+      this.setState({
+        people,
+        cats: pets.cats,
+        dogs: pets.dogs,
+        loading: false,
+      });
+    } catch (error) {}
+  };
 
   handleSignUp = (name) => {
     // e.preventDefault();
@@ -48,31 +54,20 @@ export class Adoption extends Component {
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
-    fetch(`${config.API_ENDPOINT}/people`, {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json',
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          return res.json().then((e) => Promise.reject(e));
-        }
-        return res.json();
-      })
-      .catch((err) => {
-        console.error({ err });
-      });
+    this.startQueue();
   };
 
-  // getPeople = () => {
-  //   return
-  // };
+  startQueue = () => {
+    return setInterval(() => {
+      this.handleAdopt('', true);
+    }, 5000);
+  };
 
-  handleAdopt = (type, both = false) => {
+  handleAdopt = async (e, type, both = false) => {
     console.log(type, both);
-    // e.preventDefault();
-    fetch(`${config.API_ENDPOINT}/api/pets`, {
+    e.preventDefault();
+    // this.setState({ loading: true });
+    await fetch(`${config.API_ENDPOINT}/api/pets`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
@@ -82,9 +77,11 @@ export class Adoption extends Component {
         both,
       }),
     });
+    this.getPeopleAndPets();
   };
 
   handleChange = (event) => {
+    event.preventDefault();
     this.setState({ value: event.target.value });
   };
 
@@ -94,6 +91,7 @@ export class Adoption extends Component {
     }
 
     const { cats, dogs, people } = this.state;
+
     return (
       <div className="Adoption">
         <div className="nav-bar">
@@ -132,7 +130,9 @@ export class Adoption extends Component {
               value={this.state.value}
               onChange={this.handleChange}
             />
-            <button type="submit" onClick={() => this.handleSignUp(this.state.value)}>
+            <button
+              type="submit"
+              onClick={() => this.handleSignUp(this.state.value)}>
               Enter
             </button>
           </form>
@@ -167,7 +167,7 @@ export class Adoption extends Component {
               <button
                 className="adopt-button"
                 type="submit"
-                onClick={() => this.handleAdopt('cats')}>
+                onClick={(e) => this.handleAdopt(e, 'cats')}>
                 Adopt Me!
               </button>
             </div>
@@ -178,7 +178,7 @@ export class Adoption extends Component {
               className="both-button"
               type="submit"
               className="adopt-button both"
-              onClick={() => this.handleAdopt('', true)}>
+              onClick={(e) => this.handleAdopt(e, '', true)}>
               Adopt both!
             </button>
           </div>
@@ -211,7 +211,7 @@ export class Adoption extends Component {
               <button
                 className="adopt-button"
                 type="submit"
-                onClick={() => this.handleAdopt('dogs')}>
+                onClick={(e) => this.handleAdopt(e, 'dogs')}>
                 Adopt Me!
               </button>
             </div>

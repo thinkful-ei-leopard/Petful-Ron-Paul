@@ -6,14 +6,13 @@ const People = require('./people.service');
 
 const router = express.Router();
 
-const serializePeople = function(input){ 
+const serializePeople = function (input) {
   // NOT YET IN USE
   // this function will clean up data to help fight against XSS attacks
   return {
-    name: xss(input.name)
+    name: xss(input.name),
   };
 };
-
 
 router.get('/', (req, res) => {
   // Return all the people currently in the queue.
@@ -26,14 +25,14 @@ router.post('/', json, (req, res) => {
   const { name } = req.body;
 
   // Validation
-  if(name == null || !name){
+  if (name == null || !name) {
     return res.status(400).json({
-      error: `Invalid 'name'`
+      error: `Invalid 'name'`,
     });
   }
-  if(typeof name !== 'string'){
+  if (typeof name !== 'string') {
     return res.status(400).json({
-      error: `'name' must be a string`
+      error: `'name' must be a string`,
     });
   }
 
