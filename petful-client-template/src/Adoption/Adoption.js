@@ -205,31 +205,37 @@ export class Adoption extends Component {
         <main className="pets-container">
           <section className="cats-container">
             <h2 className="cats-header">Next available cat</h2>
-            <div className="cat-info">
-              <img
-                className="available-cat-image"
-                src={cats[0].imageURL}
-                alt={cats[0].description}
-              />
-              <p className="cat-name">
-                <span>name:</span> {cats[0].name}{' '}
-              </p>
-              <p className="cat-age">
-                <span>age:</span> {cats[0].age}{' '}
-              </p>
-              <p className="cat-gender">
-                <span>gender:</span> {cats[0].gender}{' '}
-              </p>
-              <p className="cat-breed">
-                <span>breed:</span> {cats[0].breed}{' '}
-              </p>
-              <p className="cat-story">
-                <span>story:</span> {cats[0].story}{' '}
-              </p>
-            </div>
-            <div className="center">
-              {this.renderButtons('cats', false, 'Me')}
-            </div>
+            {!cats.length ? (
+              <h3>No cats left!</h3>
+            ) : (
+              <div>
+                <div className="cat-info">
+                  <img
+                    className="available-cat-image"
+                    src={cats[0].imageURL}
+                    alt={cats[0].description}
+                  />
+                  <p className="cat-name">
+                    <span>name:</span> {cats[0].name}{' '}
+                  </p>
+                  <p className="cat-age">
+                    <span>age:</span> {cats[0].age}{' '}
+                  </p>
+                  <p className="cat-gender">
+                    <span>gender:</span> {cats[0].gender}{' '}
+                  </p>
+                  <p className="cat-breed">
+                    <span>breed:</span> {cats[0].breed}{' '}
+                  </p>
+                  <p className="cat-story">
+                    <span>story:</span> {cats[0].story}{' '}
+                  </p>
+                </div>
+                <div className="center">
+                  {this.renderButtons('cats', false, 'Me')}
+                </div>
+              </div>
+            )}
           </section>
 
           <div className="center-both">
@@ -238,31 +244,37 @@ export class Adoption extends Component {
 
           <section className="dogs-container">
             <h2 className="dogs-header">Next available dog</h2>
-            <div className="dog-info">
-              <img
-                className="available-dog-image"
-                src={dogs[0].imageURL}
-                alt={dogs[0].description}
-              />
-              <p className="dog-name">
-                <span>name:</span> {dogs[0].name}
-              </p>
-              <p className="dog-age">
-                <span>age:</span> {dogs[0].age}{' '}
-              </p>
-              <p className="dog-gender">
-                <span>gender:</span> {dogs[0].gender}
-              </p>
-              <p className="dog-breed">
-                <span>breed:</span> {dogs[0].breed}
-              </p>
-              <p className="dog-story">
-                <span>story:</span> {dogs[0].story}
-              </p>
-            </div>
-            <div className="center">
-              {this.renderButtons('dogs', false, 'Me')}
-            </div>
+            {!dogs.length ? (
+              <h3>No dogs left!</h3>
+            ) : (
+              <div>
+                <div className="dog-info">
+                  <img
+                    className="available-dog-image"
+                    src={dogs[0].imageURL}
+                    alt={dogs[0].description}
+                  />
+                  <p className="dog-name">
+                    <span>name:</span> {dogs[0].name}
+                  </p>
+                  <p className="dog-age">
+                    <span>age:</span> {dogs[0].age}{' '}
+                  </p>
+                  <p className="dog-gender">
+                    <span>gender:</span> {dogs[0].gender}
+                  </p>
+                  <p className="dog-breed">
+                    <span>breed:</span> {dogs[0].breed}
+                  </p>
+                  <p className="dog-story">
+                    <span>story:</span> {dogs[0].story}
+                  </p>
+                </div>
+                <div className="center">
+                  {this.renderButtons('dogs', false, 'Me')}
+                </div>
+              </div>
+            )}
           </section>
         </main>
       </div>
