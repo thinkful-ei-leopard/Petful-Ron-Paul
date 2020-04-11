@@ -10,6 +10,7 @@ export class Adoption extends Component {
     cats: [],
     value: '',
     loading: true,
+    name: '',
   };
 
   componentDidMount() {
@@ -31,13 +32,11 @@ export class Adoption extends Component {
         })
         .catch((error) => {});
     });
-
-    console.log(this.state.cats);
   }
 
   handleSignUp = (name) => {
     // e.preventDefault();
-    console.log(this.state.cats);
+    // * POST NEW PERSON
     fetch(`${config.API_ENDPOINT}/api/people`, {
       method: 'POST',
       headers: {
@@ -49,7 +48,26 @@ export class Adoption extends Component {
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
+    fetch(`${config.API_ENDPOINT}/people`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return res.json().then((e) => Promise.reject(e));
+        }
+        return res.json();
+      })
+      .catch((err) => {
+        console.error({ err });
+      });
   };
+
+  // getPeople = () => {
+  //   return
+  // };
 
   handleAdopt = (type, both = false) => {
     console.log(type, both);
@@ -89,7 +107,8 @@ export class Adoption extends Component {
             Welcome to the adoption page! Cats and dogs are available for
             adoption based on how long they've been with us. Please input your
             name to be added to the list. Once it's your turn, you may choose to
-            adopt the dog or cat who is currently up for adoption (or get them both!).
+            adopt the dog or cat who is currently up for adoption (or get them
+            both!).
           </p>
         </div>
         <div className="waitlist">
@@ -99,6 +118,7 @@ export class Adoption extends Component {
             <li>{people.allPeople[1]}</li>
             <li>{people.allPeople[2]}</li>
             <li>{people.allPeople[3]}</li>
+            <li>{people.allPeople[4]}</li>
           </ul>
         </div>
 
@@ -112,13 +132,11 @@ export class Adoption extends Component {
               value={this.state.value}
               onChange={this.handleChange}
             />
-            <button type="submit" onClick={this.handleSignUp}>
+            <button type="submit" onClick={() => this.handleSignUp(this.state.value)}>
               Enter
             </button>
           </form>
         </div>
-
-        
 
         <main className="pets-container">
           <section className="cats-container">
@@ -156,14 +174,14 @@ export class Adoption extends Component {
           </section>
 
           <div className="center-both">
-          <button
-            className="both-button"
-            type="submit"
-            className="adopt-button both"
-            onClick={() => this.handleAdopt('', true)}>
-            Adopt both!
-          </button>
-        </div>
+            <button
+              className="both-button"
+              type="submit"
+              className="adopt-button both"
+              onClick={() => this.handleAdopt('', true)}>
+              Adopt both!
+            </button>
+          </div>
 
           <section className="dogs-container">
             <h2 className="dogs-header">Next available dog</h2>
