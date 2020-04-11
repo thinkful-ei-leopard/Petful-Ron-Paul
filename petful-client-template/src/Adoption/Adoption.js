@@ -11,6 +11,23 @@ export class Adoption extends Component {
     value: '',
     loading: true,
     name: '',
+    fakePeople: [
+      'Laura Palmer',
+      'Dale Cooper',
+      'Donna Hayward',
+      'Leland Palmer',
+      'Audrey Horne',
+      'Josie Packard',
+      'Norma Jennings',
+      'James Hurley',
+      'Bobby Briggs',
+      'Dr. Lawrence Jacoby',
+      'Nadine Hurley',
+      'Leo Johnson',
+      'Catherine Martell',
+      'Log Lady',
+      'Gordon Cole',
+    ],
   };
 
   componentDidMount() {
@@ -19,7 +36,6 @@ export class Adoption extends Component {
 
   getPeopleAndPets = async () => {
     // get all people and pets on component
-    // this.setState({ loading: true });
     const [peopleRes, petsRes] = await Promise.all([
       fetch(`${config.API_ENDPOINT}/api/people`),
       fetch(`${config.API_ENDPOINT}/api/pets`),
@@ -42,7 +58,7 @@ export class Adoption extends Component {
 
   handleSignUp = async (e, name) => {
     e.preventDefault();
-    this.setState({ name });
+    const { fakePeople } = this.state;
     // * POST NEW PERSON
     await fetch(`${config.API_ENDPOINT}/api/people`, {
       method: 'POST',
@@ -55,31 +71,42 @@ export class Adoption extends Component {
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
-    this.getPeopleAndPets();
-    this.startQueue();
+    await this.getPeopleAndPets();
+    if (!fakePeople.includes(name)) {
+      this.setState({ name });
+      await this.startQueue(e);
+    }
   };
 
-  startQueue = () => {
+  randomPet = () => {
+    const pets = ['dogs', 'cats'];
+    let randomNum = Math.round(Math.random());
+    return pets[randomNum];
+  };
+
+  startQueue = (e) => {
+    const { fakePeople } = this.state;
     const { name, people } = this.state;
+    let counter = 0;
     if (name !== people.allPeople[0]) {
       return setInterval(() => {
         const { name, people } = this.state;
-        const pets = ['dogs', 'cats'];
-        let randomNum = Math.round(Math.random());
-        let randomPet = pets[randomNum];
-        console.log(randomPet);
+        let randomPet = this.randomPet();
+        let fakePerson = fakePeople[counter];
         if (name === people.allPeople[0]) {
           clearInterval();
           return;
         }
-        this.handleAdopt('', randomPet, false);
+        this.handleAdopt(randomPet, false);
+        this.handleSignUp(e, fakePerson);
+        counter < 10 ? counter++ : (counter = 0);
       }, 5000);
     } else {
       clearInterval();
     }
   };
 
-  handleAdopt = async (e, type, both = false) => {
+  handleAdopt = async (type, both = false) => {
     console.log(type, both);
     // e.preventDefault();
     await fetch(`${config.API_ENDPOINT}/api/pets`, {
@@ -111,8 +138,8 @@ export class Adoption extends Component {
         <button
           className="adopt-button"
           type="submit"
-          onClick={(e) => {
-            this.handleAdopt(e, type, both);
+          onClick={() => {
+            this.handleAdopt(type, both);
             this.notifySuccess();
           }}>
           Adopt {who}!

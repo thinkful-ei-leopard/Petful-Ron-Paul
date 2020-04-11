@@ -130,12 +130,17 @@ li {
 .waitlist-form-container {
   display: flex;
   padding-bottom: 1rem;
-  // z-index: 2;
+  position: relative;
+  justify-content: center;
 }
 
 .waitlist-form {
   margin: 0 auto;
   z-index: 2;
+  position: relative;
+  bottom: 0;
+  height: 50px;
+  margin: 0 auto;
 }
 
 label {
@@ -150,7 +155,7 @@ input {
 
 .intro-text {
   font-size: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   width: 80%;
   line-height: 1.5rem;
 }
