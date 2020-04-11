@@ -26,6 +26,30 @@
   align-items: center;
 }
 
+.cat-info,
+.dog-info {
+  width: 300px;
+}
+
+.cat-info p,
+.dog-info p {
+  text-align: left;
+  margin-left: 0;
+}
+
+.available-cat-image,
+.available-dog-image {
+  width: 100%;
+  border: 2px solid var(--main);
+  margin-bottom: 1rem;
+}
+
+.cats-container, .dogs-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 @include mobileLandscape {
   .pets-container {
     display: flex;

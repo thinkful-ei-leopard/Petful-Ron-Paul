@@ -63,7 +63,7 @@ export class Adoption extends Component {
       return <></>;
     }
 
-    const { cats } = this.state;
+    const { cats, dogs, people } = this.state;
     return (
       <div className="Adoption">
         <div className="nav-bar">
@@ -106,7 +106,7 @@ export class Adoption extends Component {
         </div>
 
         <main className="pets-container">
-          <div className="cats-container">
+          <section className="cats-container">
             <h2 className="cats-header">Cats</h2>
             <img src="" alt="" />
             <div className="cat-info">
@@ -121,18 +121,22 @@ export class Adoption extends Component {
               <p className="cat-breed">breed: {cats[0].breed} </p>
               <p className="cat-story">story: {cats[0].story} </p>
             </div>
-          </div>
-          <div className="dogs-container">
+          </section>
+          <section className="dogs-container">
             <h2 className="dogs-header">Dogs</h2>
-            <img src="" alt="" />
             <div className="dog-info">
-              <p className="dog-name">name: </p>
-              <p className="dog-age">age: </p>
-              <p className="dog-gender">gender: </p>
-              <p className="dog-breed">breed: </p>
-              <p className="dog-story">story: </p>
+            <img
+              className="available-dog-image"
+              src={dogs[0].imageURL}
+              alt={dogs[0].description}
+            />
+              <p className="dog-name">name: {dogs[0].name}</p>
+              <p className="dog-age">age: {dogs[0].age} </p>
+              <p className="dog-gender">gender: {dogs[0].gender}</p>
+              <p className="dog-breed">breed: {dogs[0].breed}</p>
+              <p className="dog-story">story: {dogs[0].story}</p>
             </div>
-          </div>
+          </section>
         </main>
       </div>
     );
