@@ -8,31 +8,23 @@ const router = express.Router();
 
 router.get('/', (req, res, next) => {
   // Return all pets currently up for adoption.
-  // NEEDS VALIDATION
   return res.status(200).json(Pets.getAllPets());
 });
 
 router.delete('/', json, (req, res) => {
-  // Remove 2 pets (cat and dog) from adoption
-  // Remove the person who adopted the pet as well
+  // 'type' determines which type of animal was adopted('cats' or 'dogs')
+  // Removes the adopted pets and the new pet owner from their respective Queues
+  // if 'both=true' is sent, it will remove a dog and a cat, plus the owner from their queues
 
-  // to dequeue people, it requires no input
-  // to dequeue
   const { type, both } = req.body;
   
-  // Since 'both' the boolean gets converted to a string, this way we can check 
-  // if the boolean true
+  // check if "both" is TRUE first, if it is then do a  dequeue for both types individually
   if(both === 'true'){
     Pets.dequeue('cats');
     Pets.dequeue('dogs');
     People.dequeue();
     return res.status(204).send();
   }
-
-  // check if "both" is TRUE first, if it is then do a  dequeue for both types individually
-  // be CAREFUL not to do extra dequeues if we get "type: cats, both: true" - we dont want to delete 2 cats and 1 dog
-  /////////////////// return res.status(200).json({message: 'i dunno bro'});
-
 
   // Validation
   if(type == null || !type){
@@ -50,7 +42,7 @@ router.delete('/', json, (req, res) => {
       error: `'type' must either be 'cats' or 'dogs'`
     });
   }
-
+  
   // In case something doesn't get caught
   const petType = `${type}`;
   Pets.dequeue(petType);
