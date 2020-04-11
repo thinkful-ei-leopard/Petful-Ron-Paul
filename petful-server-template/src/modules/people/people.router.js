@@ -6,7 +6,8 @@ const People = require('./people.service');
 
 const router = express.Router();
 
-const serializePeople = function(input){
+const serializePeople = function(input){ 
+  // NOT YET IN USE
   // this function will clean up data to help fight against XSS attacks
   return {
     name: xss(input.name)

@@ -13,9 +13,22 @@ router.get('/', (req, res, next) => {
 });
 
 router.delete('/', json, (req, res) => {
-  // Remove a pet from adoption.
-  // Remove the person and the animals
-  // I could also create differnet
+  // Remove 2 pets (cat and dog) from adoption
+  // Remove the person who adopted the pet as well
+
+});
+
+
+router.delete('/cats', json, (req, res) => {
+  // Remove a pet(cat) from adoption
+  // Remove the person who adopted the pet as well
+
+});
+
+router.delete('/dogs', json, (req, res) => {
+  // Remove a pet(dog) from adoption
+  // Remove the person who adopted the pet as well
+
 });
 
 module.exports = router;
