@@ -110,6 +110,10 @@ export class Adoption extends Component {
     this.setState({ value: event.target.value });
   };
 
+  notifySuccess = () => {
+    alert('congrats! you have made a successful adoption!');
+  };
+
   renderButtons = (type, both, who) => {
     const { name, people } = this.state;
     if (name === people.allPeople[0]) {
@@ -117,7 +121,10 @@ export class Adoption extends Component {
         <button
           className="adopt-button"
           type="submit"
-          onClick={(e) => this.handleAdopt(e, type, both)}>
+          onClick={(e) => {
+            this.handleAdopt(e, type, both);
+            this.notifySuccess();
+          }}>
           Adopt {who}!
         </button>
       );
@@ -125,7 +132,7 @@ export class Adoption extends Component {
   };
 
   render() {
-    const { cats, dogs, people, name } = this.state;
+    const { cats, dogs, people } = this.state;
 
     if (this.state.loading) {
       return <></>;
@@ -205,7 +212,9 @@ export class Adoption extends Component {
                 <span>story:</span> {cats[0].story}{' '}
               </p>
             </div>
-            <div className="center">{this.renderButtons('cats', false, 'Me')}</div>
+            <div className="center">
+              {this.renderButtons('cats', false, 'Me')}
+            </div>
           </section>
 
           <div className="center-both">
@@ -243,7 +252,9 @@ export class Adoption extends Component {
                 <span>story:</span> {dogs[0].story}
               </p>
             </div>
-            <div className="center">{this.renderButtons('dogs', false, 'Me')}</div>
+            <div className="center">
+              {this.renderButtons('dogs', false, 'Me')}
+            </div>
           </section>
         </main>
       </div>
