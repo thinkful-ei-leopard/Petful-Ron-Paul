@@ -13,6 +13,7 @@ export class Adoption extends Component {
   };
 
   componentDidMount() {
+    // get all people and pets on component
     Promise.all([
       fetch(`${config.API_ENDPOINT}/api/people`),
       fetch(`${config.API_ENDPOINT}/api/pets`),
@@ -34,29 +35,40 @@ export class Adoption extends Component {
     console.log(this.state.cats);
   }
 
-  handleSignUp = (e) => {
-    e.preventDefault();
+  handleSignUp = (name) => {
+    // e.preventDefault();
     console.log(this.state.cats);
+    fetch(`${config.API_ENDPOINT}/api/people`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+      }),
+    }).then((res) =>
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+    );
   };
 
-  handleAdopt = (e) => {
-    e.preventDefault();
-
-    fetch(`${config.API_ENDPOINT}/api/pets/`, {
+  handleAdopt = (type, both = false) => {
+    console.log(type, both);
+    // e.preventDefault();
+    fetch(`${config.API_ENDPOINT}/api/pets`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
       },
-    })
-      .then(() => {
-        // this.setState({ loading: true });
-      })
-      .catch(() => {});
+      body: JSON.stringify({
+        type,
+        both,
+      }),
+    });
   };
 
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({ value: event.target.value });
-  }
+  };
 
   render() {
     if (this.state.loading) {
@@ -83,22 +95,24 @@ export class Adoption extends Component {
         <div className="waitlist">
           <h3 className="waitlist-header">Waitlist</h3>
           <ul className="user-list">
-            <li>user 1</li>
-            <li>user 2</li>
-            <li>user 3</li>
-            <li>user 4</li>
+            <li>{people.allPeople[0]}</li>
+            <li>{people.allPeople[1]}</li>
+            <li>{people.allPeople[2]}</li>
+            <li>{people.allPeople[3]}</li>
           </ul>
         </div>
 
         <div className="waitlist-form-container">
           <form className="waitlist-form">
-            <label htmlFor="adopter-name">Add Name: </label>
+          <div className="input-wrapper">
+            <label htmlFor="adopter-name">Add your name to the list! </label>
             <input
               id="adopter-name"
               type="text"
               value={this.state.value}
               onChange={this.handleChange}
             />
+            </div>
             <button type="submit" onClick={this.handleSignUp}>
               Enter
             </button>
@@ -107,35 +121,72 @@ export class Adoption extends Component {
 
         <main className="pets-container">
           <section className="cats-container">
-            <h2 className="cats-header">Cats</h2>
-            <img src="" alt="" />
+            <h2 className="cats-header">Next available cat</h2>
             <div className="cat-info">
               <img
                 className="available-cat-image"
                 src={cats[0].imageURL}
                 alt={cats[0].description}
               />
-              <p className="cat-name">name: {cats[0].name} </p>
-              <p className="cat-age">age: {cats[0].age} </p>
-              <p className="cat-gender">gender: {cats[0].gender} </p>
-              <p className="cat-breed">breed: {cats[0].breed} </p>
-              <p className="cat-story">story: {cats[0].story} </p>
+              <p className="cat-name">
+                <span>name:</span> {cats[0].name}{' '}
+              </p>
+              <p className="cat-age">
+                <span>age:</span> {cats[0].age}{' '}
+              </p>
+              <p className="cat-gender">
+                <span>gender:</span> {cats[0].gender}{' '}
+              </p>
+              <p className="cat-breed">
+                <span>breed:</span> {cats[0].breed}{' '}
+              </p>
+              <p className="cat-story">
+                <span>story:</span> {cats[0].story}{' '}
+              </p>
             </div>
+            <button
+              className="adopt-button"
+              type="submit"
+              onClick={() => this.handleAdopt('cats')}>
+              Adopt Me!
+            </button>
           </section>
+          <button
+            type="submit"
+            className="adopt-button both"
+            onClick={() => this.handleAdopt('', true)}>
+            Adopt both!
+          </button>
           <section className="dogs-container">
-            <h2 className="dogs-header">Dogs</h2>
+            <h2 className="dogs-header">Next available dog</h2>
             <div className="dog-info">
-            <img
-              className="available-dog-image"
-              src={dogs[0].imageURL}
-              alt={dogs[0].description}
-            />
-              <p className="dog-name">name: {dogs[0].name}</p>
-              <p className="dog-age">age: {dogs[0].age} </p>
-              <p className="dog-gender">gender: {dogs[0].gender}</p>
-              <p className="dog-breed">breed: {dogs[0].breed}</p>
-              <p className="dog-story">story: {dogs[0].story}</p>
+              <img
+                className="available-dog-image"
+                src={dogs[0].imageURL}
+                alt={dogs[0].description}
+              />
+              <p className="dog-name">
+                <span>name:</span> {dogs[0].name}
+              </p>
+              <p className="dog-age">
+                <span>age:</span> {dogs[0].age}{' '}
+              </p>
+              <p className="dog-gender">
+                <span>gender:</span> {dogs[0].gender}
+              </p>
+              <p className="dog-breed">
+                <span>breed:</span> {dogs[0].breed}
+              </p>
+              <p className="dog-story">
+                <span>story:</span> {dogs[0].story}
+              </p>
             </div>
+            <button
+              className="adopt-button"
+              type="submit"
+              onClick={() => this.handleAdopt('dogs')}>
+              Adopt Me!
+            </button>
           </section>
         </main>
       </div>

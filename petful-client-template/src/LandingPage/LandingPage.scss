@@ -30,6 +30,14 @@ p {
   margin: 0 auto;
 }
 
+@include tabletLandscape {
+  p {
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    width: 60%;
+  }
+}
+
 .first-come {
   font-style: italic;
 }
@@ -38,7 +46,7 @@ p {
   text-align: center;
   background-color: var(--green);
   text-decoration: none;
-  margin: 2rem auto;
+  margin: 2rem 1rem;
   display: block;
   width: 200px;
   padding: 1rem;
@@ -49,7 +57,7 @@ p {
 }
 
 .adopt-button p {
-  color: rgb(206, 64, 194);
+  color: var(--highlight);
   font-size: 1.5rem;
   text-transform: uppercase;
   font-weight: bold;

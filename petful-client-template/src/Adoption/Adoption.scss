@@ -35,6 +35,8 @@
 .dog-info p {
   text-align: left;
   margin-left: 0;
+  font-size: 1rem;
+  line-height: 1.4rem;
 }
 
 .available-cat-image,
@@ -44,7 +46,8 @@
   margin-bottom: 1rem;
 }
 
-.cats-container, .dogs-container {
+.cats-container,
+.dogs-container {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -118,6 +121,13 @@ li {
 
 label {
   font-family: Roboto Mono;
+  display: block;
+  padding-bottom: 1rem;
+}
+
+input {
+  margin: 0 auto;
+  text-align: center;
 }
 
 .intro-text {
@@ -130,4 +140,31 @@ label {
   .intro-text {
     width: 50%;
   }
+}
+
+.adopt-button {
+  text-align: center;
+  background-color: var(--green);
+  text-decoration: none;
+  margin: 2rem 1rem;
+  display: block;
+  width: 200px;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  border: 2px solid var(--main);
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: Roboto Mono, monospace;
+}
+
+.adopt-button:hover {
+  color: var(--main);
+  cursor: pointer;
+  background-color: rgb(191, 129, 254);
+}
+
+main span {
+  font-weight: bold;
 }
