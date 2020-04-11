@@ -33,7 +33,7 @@ module.exports = {
 
   dequeue(type) {
     // Remove a pet from the queue.
-    if(type === 'cat'){
+    if(type === 'cats'){
       pets.cats.dequeue();
     } 
     else if(type === 'dogs'){
