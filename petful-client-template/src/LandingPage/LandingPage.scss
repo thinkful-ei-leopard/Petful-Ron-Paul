@@ -67,6 +67,11 @@ p {
   font-family: Roboto Mono, monospace;
 }
 
+.adopt-button:hover {
+  background-color: rgb(255, 250, 111);
+  cursor: pointer;
+}
+
 @include mobileLandscape {
   .dogcat {
     width: 400px;

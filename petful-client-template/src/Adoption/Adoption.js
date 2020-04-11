@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Adoption.scss';
 import config from '../config';
 
@@ -89,7 +89,7 @@ export class Adoption extends Component {
             Welcome to the adoption page! Cats and dogs are available for
             adoption based on how long they've been with us. Please input your
             name to be added to the list. Once it's your turn, you may choose to
-            adopt the dog or cat who is currently up for adoption.
+            adopt the dog or cat who is currently up for adoption (or get them both!).
           </p>
         </div>
         <div className="waitlist">
@@ -118,15 +118,7 @@ export class Adoption extends Component {
           </form>
         </div>
 
-        <div className="center-both">
-          <button
-            className="both-button"
-            type="submit"
-            className="adopt-button both"
-            onClick={() => this.handleAdopt('', true)}>
-            Adopt both!
-          </button>
-        </div>
+        
 
         <main className="pets-container">
           <section className="cats-container">
@@ -153,13 +145,25 @@ export class Adoption extends Component {
                 <span>story:</span> {cats[0].story}{' '}
               </p>
             </div>
-            <button
-              className="adopt-button"
-              type="submit"
-              onClick={() => this.handleAdopt('cats')}>
-              Adopt Me!
-            </button>
+            <div className="center">
+              <button
+                className="adopt-button"
+                type="submit"
+                onClick={() => this.handleAdopt('cats')}>
+                Adopt Me!
+              </button>
+            </div>
           </section>
+
+          <div className="center-both">
+          <button
+            className="both-button"
+            type="submit"
+            className="adopt-button both"
+            onClick={() => this.handleAdopt('', true)}>
+            Adopt both!
+          </button>
+        </div>
 
           <section className="dogs-container">
             <h2 className="dogs-header">Next available dog</h2>
@@ -185,12 +189,14 @@ export class Adoption extends Component {
                 <span>story:</span> {dogs[0].story}
               </p>
             </div>
-            <button
-              className="adopt-button"
-              type="submit"
-              onClick={() => this.handleAdopt('dogs')}>
-              Adopt Me!
-            </button>
+            <div className="center">
+              <button
+                className="adopt-button"
+                type="submit"
+                onClick={() => this.handleAdopt('dogs')}>
+                Adopt Me!
+              </button>
+            </div>
           </section>
         </main>
       </div>

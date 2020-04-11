@@ -57,7 +57,7 @@ body {
   flex-direction: column;
 }
 
-@include mobileLandscape {
+@include tabletLandscape {
   .pets-container {
     display: flex;
     flex-direction: row;
@@ -162,22 +162,30 @@ input {
   font-family: Roboto Mono, monospace;
 }
 
-.adopt-button:hover {
-  color: var(--main);
-  cursor: pointer;
-  background-color: rgb(191, 129, 254);
-}
-
-.both-button {
-  margin: 0 auto;
+.adopt-button.both {
   text-align: center;
   display: block;
+}
+
+@include tabletLandscape {
+  .adopt-button.both {
+    margin: 0 -4rem;
+  }
 }
 
 .center-both {
   display: flex;
   justify-content: center;
   align-items: flex-end;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  position: relative;
 }
 
 main span {
