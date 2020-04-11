@@ -59,31 +59,35 @@ export class Adoption extends Component {
     this.startQueue();
   };
 
-  // startQueue = () => {
-  //   const { name, people } = this.state;
-  //   if (name !== people.allPeople[0]) {
-  //     return setInterval(() => {
-  //       console.log(name, people.allPeople[0]);
-  //       this.handleAdopt('', '', true);
-  //       this.getPeopleAndPets();
-  //     }, 5000);
-  //   } else {
-  //     clearInterval();
-  //   }
-  // };
-
-  startQueue = async () => {
+  startQueue = () => {
     const { name, people } = this.state;
-    return await new Promise((resolve) => {
-      const interval = setInterval(() => {
+    if (name !== people.allPeople[0]) {
+      return setInterval(() => {
+        const { name, people } = this.state;
         console.log(name, people.allPeople[0]);
-        this.handleAdopt('', '', true);
         if (name === people.allPeople[0]) {
-          clearInterval(interval);
+          clearInterval();
+          return;
         }
+        this.handleAdopt('', '', true);
       }, 5000);
-    });
+    } else {
+      clearInterval();
+    }
   };
+
+  // startQueue = async () => {
+  //   return await new Promise((resolve) => {
+  //     const interval = setInterval(() => {
+  //       const { name, people } = this.state;
+  //       console.log(name, people.allPeople[0]);
+  //       if (name === people.allPeople[0]) {
+  //         clearInterval(interval);
+  //       }
+  //       this.handleAdopt('', '', true);
+  //     }, 5000);
+  //   });
+  // };
 
   handleAdopt = async (e, type, both = false) => {
     console.log(type, both);
@@ -98,7 +102,7 @@ export class Adoption extends Component {
         both,
       }),
     });
-    this.getPeopleAndPets();
+    await this.getPeopleAndPets();
   };
 
   handleChange = (event) => {
