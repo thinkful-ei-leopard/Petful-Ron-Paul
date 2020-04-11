@@ -6,5 +6,6 @@
 returns a JSON object with key "allPeople":['person name', 'person2 name', 'etc']
 
 - POST
-requires a string "name"
+requires a string "name" to be sent in the POST request
+returns back with the name of that you sent in.
 
