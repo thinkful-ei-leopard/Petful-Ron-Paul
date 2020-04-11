@@ -12,7 +12,6 @@ store.people.forEach(person => people.enqueue(person));
 module.exports = {
   getAllPeople() {
     // Return all people in the queue.
-    // MAY NEED TO CHANGE 'people'
     const allPeople = people.all();
     return {
       allPeople
@@ -26,6 +25,6 @@ module.exports = {
 
   dequeue() {
     // Remove a person from the queue.
-    return people.dequeue();
+    people.dequeue();
   }
 };

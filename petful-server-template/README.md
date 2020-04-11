@@ -1,5 +1,5 @@
-# Petful Server
-
+# Petful Server 
+Authors: Ron Martin and Paul Baisley
 
 #### /api/people
 - GET 

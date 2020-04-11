@@ -22,7 +22,7 @@ class Queue {
   }
   dequeue(){
     if(!this.first) {
-      return console.log('nada in queue')
+      return console.log('nada in queue');
     }
     const node = this.first;
     this.first = this.first.next;
