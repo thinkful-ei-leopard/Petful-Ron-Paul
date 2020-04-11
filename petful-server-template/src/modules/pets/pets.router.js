@@ -17,7 +17,6 @@ router.delete('/', json, (req, res) => {
   // if 'both=true' is sent, it will remove a dog and a cat, plus the owner from their queues
 
   const { type, both } = req.body;
-  console.log(type, both)
   
   // check if "both" is TRUE first, if it is then do a  dequeue for both types individually
   if(both){

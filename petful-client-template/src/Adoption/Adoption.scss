@@ -28,19 +28,30 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  padding-bottom: 2rem;
+  bottom: 0;
+}
+
+@include tabletLandscape {
+  .pets-container {
+    position: fixed;
+  }
 }
 
 .cat-info,
 .dog-info {
   width: 300px;
+  position: block;
 }
 
 .cat-info p,
 .dog-info p {
   text-align: left;
-  margin-left: 0;
-  font-size: 1rem;
-  line-height: 1.4rem;
+  margin: 0;
+  font-size: .9rem;
+  line-height: 1.5rem;
+  width: 100%;
 }
 
 .available-cat-image,
@@ -76,11 +87,11 @@ p {
   font-size: 1rem;
   line-height: 1.2rem;
   color: var(--main);
-  margin: 0 auto;
+  margin: 0;
 }
 
 .user-list {
-  margin: 0 auto;
+  margin: 0 auto 2rem;
   display: flex;
 }
 
@@ -105,6 +116,8 @@ li {
   display: flex;
   flex-direction: column;
   margin-bottom: 2rem;
+  height: 150px;
+  z-index: 2;
 }
 
 .waitlist-header {
@@ -117,10 +130,12 @@ li {
 .waitlist-form-container {
   display: flex;
   padding-bottom: 1rem;
+  // z-index: 2;
 }
 
 .waitlist-form {
   margin: 0 auto;
+  z-index: 2;
 }
 
 label {
@@ -137,6 +152,7 @@ input {
   font-size: 1rem;
   margin-bottom: 2rem;
   width: 80%;
+  line-height: 1.5rem;
 }
 
 @include tabletPortrait {

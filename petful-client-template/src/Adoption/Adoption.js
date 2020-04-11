@@ -64,30 +64,20 @@ export class Adoption extends Component {
     if (name !== people.allPeople[0]) {
       return setInterval(() => {
         const { name, people } = this.state;
-        console.log(name, people.allPeople[0]);
+        const pets = ['dogs', 'cats'];
+        let randomNum = Math.round(Math.random());
+        let randomPet = pets[randomNum];
+        console.log(randomPet);
         if (name === people.allPeople[0]) {
           clearInterval();
           return;
         }
-        this.handleAdopt('', '', true);
+        this.handleAdopt('', randomPet, false);
       }, 5000);
     } else {
       clearInterval();
     }
   };
-
-  // startQueue = async () => {
-  //   return await new Promise((resolve) => {
-  //     const interval = setInterval(() => {
-  //       const { name, people } = this.state;
-  //       console.log(name, people.allPeople[0]);
-  //       if (name === people.allPeople[0]) {
-  //         clearInterval(interval);
-  //       }
-  //       this.handleAdopt('', '', true);
-  //     }, 5000);
-  //   });
-  // };
 
   handleAdopt = async (e, type, both = false) => {
     console.log(type, both);
@@ -164,27 +154,26 @@ export class Adoption extends Component {
             <li>{people.allPeople[3]}</li>
             <li>{people.allPeople[4]}</li>
           </ul>
-        </div>
-
-        <div className="waitlist-form-container">
-          <form className="waitlist-form" autoComplete="off">
-            <label htmlFor="adopter-name">Add your name: </label>
-            <input
-              id="adopter-name"
-              autoComplete="off"
-              type="text"
-              value={this.state.value}
-              onChange={this.handleChange}
-            />
-            <button
-              type="submit"
-              onClick={(e) => {
-                this.handleSignUp(e, this.state.value);
-                this.setState({ value: '' });
-              }}>
-              Enter
-            </button>
-          </form>
+          <div className="waitlist-form-container">
+            <form className="waitlist-form" autoComplete="off">
+              <label htmlFor="adopter-name">Add your name: </label>
+              <input
+                id="adopter-name"
+                autoComplete="off"
+                type="text"
+                value={this.state.value}
+                onChange={this.handleChange}
+              />
+              <button
+                type="submit"
+                onClick={(e) => {
+                  this.handleSignUp(e, this.state.value);
+                  this.setState({ value: '' });
+                }}>
+                Enter
+              </button>
+            </form>
+          </div>
         </div>
 
         <main className="pets-container">
@@ -219,13 +208,6 @@ export class Adoption extends Component {
 
           <div className="center-both">
             {this.renderButtons('', true, 'Both')}
-            {/* <button
-              className="both-button"
-              type="submit"
-              className="adopt-button both"
-              onClick={(e) => this.handleAdopt(e, '', true)}>
-              Adopt both!
-            </button> */}
           </div>
 
           <section className="dogs-container">
