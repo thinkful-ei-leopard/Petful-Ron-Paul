@@ -110,12 +110,26 @@ export class Adoption extends Component {
     this.setState({ value: event.target.value });
   };
 
+  renderButtons = (type, both, who) => {
+    const { name, people } = this.state;
+    if (name === people.allPeople[0]) {
+      return (
+        <button
+          className="adopt-button"
+          type="submit"
+          onClick={(e) => this.handleAdopt(e, type, both)}>
+          Adopt {who}!
+        </button>
+      );
+    }
+  };
+
   render() {
+    const { cats, dogs, people, name } = this.state;
+
     if (this.state.loading) {
       return <></>;
     }
-
-    const { cats, dogs, people } = this.state;
 
     return (
       <div className="Adoption">
@@ -191,24 +205,18 @@ export class Adoption extends Component {
                 <span>story:</span> {cats[0].story}{' '}
               </p>
             </div>
-            <div className="center">
-              <button
-                className="adopt-button"
-                type="submit"
-                onClick={(e) => this.handleAdopt(e, 'cats')}>
-                Adopt Me!
-              </button>
-            </div>
+            <div className="center">{this.renderButtons('cats', false, 'Me')}</div>
           </section>
 
           <div className="center-both">
-            <button
+            {this.renderButtons('', true, 'Both')}
+            {/* <button
               className="both-button"
               type="submit"
               className="adopt-button both"
               onClick={(e) => this.handleAdopt(e, '', true)}>
               Adopt both!
-            </button>
+            </button> */}
           </div>
 
           <section className="dogs-container">
@@ -235,14 +243,7 @@ export class Adoption extends Component {
                 <span>story:</span> {dogs[0].story}
               </p>
             </div>
-            <div className="center">
-              <button
-                className="adopt-button"
-                type="submit"
-                onClick={(e) => this.handleAdopt(e, 'dogs')}>
-                Adopt Me!
-              </button>
-            </div>
+            <div className="center">{this.renderButtons('dogs', false, 'Me')}</div>
           </section>
         </main>
       </div>
