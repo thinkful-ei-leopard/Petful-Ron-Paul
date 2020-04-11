@@ -153,13 +153,15 @@ export class Adoption extends Component {
 
     return (
       <div className="Adoption">
-        <div className="nav-bar">
+        <nav className="nav-bar">
           <Link className="home-link" to={'/'}>
-            Petful
+            <h1 className="petful-header">
+              Petful
+            </h1>
           </Link>
-        </div>
+        </nav>
 
-        <div className="adoption-info">
+        <section role="contentinfo" className="adoption-info">
           <p className="intro-text">
             Welcome to the adoption page! Cats and dogs are available for
             adoption based on how long they've been with us. Please input your
@@ -167,9 +169,9 @@ export class Adoption extends Component {
             adopt the dog or cat who is currently up for adoption (or get them
             both!).
           </p>
-        </div>
+        
         <div className="waitlist">
-          <h3 className="waitlist-header">Waitlist</h3>
+          <h2 className="waitlist-header">Waitlist</h2>
           <ul className="user-list">
             <li>{people.allPeople[0]}</li>
             <li>{people.allPeople[1]}</li>
@@ -199,6 +201,7 @@ export class Adoption extends Component {
             </form>
           </div>
         </div>
+        </section>
 
         <main className="pets-container">
           <section className="cats-container">

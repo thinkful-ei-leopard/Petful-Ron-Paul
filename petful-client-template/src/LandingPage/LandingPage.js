@@ -5,7 +5,7 @@ import './LandingPage.scss';
 export class LandingPage extends Component {
   render() {
     return (
-      <div className="LandingPage">
+      <main className="LandingPage">
         <h1 className="header">Welcome to Petful!</h1>
         <img
           className="dogcat"
@@ -23,7 +23,7 @@ export class LandingPage extends Component {
         <Link to="/adoption" className="adopt-button">
           <p>Adopt Now!</p>
         </Link>
-      </div>
+      </main>
     );
   }
 }

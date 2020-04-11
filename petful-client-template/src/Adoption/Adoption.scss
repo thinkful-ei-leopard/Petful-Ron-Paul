@@ -16,6 +16,10 @@ body {
   margin-bottom: 3rem;
 }
 
+.petful-header {
+  color: rgb(29, 107, 223)
+}
+
 .home-link {
   color: white;
   text-decoration: none;
@@ -53,7 +57,7 @@ body {
 .dog-info p {
   text-align: left;
   margin: 0;
-  font-size: .9rem;
+  font-size: 0.9rem;
   line-height: 1.5rem;
   width: 100%;
 }
@@ -71,7 +75,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-
 
 @include tabletLandscape {
   .pets-container {
