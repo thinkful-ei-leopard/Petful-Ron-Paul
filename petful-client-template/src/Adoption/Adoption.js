@@ -40,10 +40,10 @@ export class Adoption extends Component {
     } catch (error) {}
   };
 
-  handleSignUp = (name) => {
-    // e.preventDefault();
+  handleSignUp = async (e, name) => {
+    e.preventDefault();
     // * POST NEW PERSON
-    fetch(`${config.API_ENDPOINT}/api/people`, {
+    await fetch(`${config.API_ENDPOINT}/api/people`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -65,8 +65,7 @@ export class Adoption extends Component {
 
   handleAdopt = async (e, type, both = false) => {
     console.log(type, both);
-    e.preventDefault();
-    // this.setState({ loading: true });
+    // e.preventDefault();
     await fetch(`${config.API_ENDPOINT}/api/pets`, {
       method: 'DELETE',
       headers: {
@@ -132,7 +131,10 @@ export class Adoption extends Component {
             />
             <button
               type="submit"
-              onClick={() => this.handleSignUp(this.state.value)}>
+              onClick={(e) => {
+                this.handleSignUp(e, this.state.value);
+                this.setState({ value: '' });
+              }}>
               Enter
             </button>
           </form>
