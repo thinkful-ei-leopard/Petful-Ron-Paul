@@ -85,8 +85,7 @@ export class Adoption extends Component {
   };
 
   startQueue = (e) => {
-    const { fakePeople } = this.state;
-    const { name, people } = this.state;
+    const { fakePeople, name, people } = this.state;
     let counter = 0;
     if (name !== people.allPeople[0]) {
       return setInterval(() => {
@@ -107,7 +106,6 @@ export class Adoption extends Component {
   };
 
   handleAdopt = async (type, both = false) => {
-    console.log(type, both);
     await fetch(`${config.API_ENDPOINT}/api/pets`, {
       method: 'DELETE',
       headers: {
