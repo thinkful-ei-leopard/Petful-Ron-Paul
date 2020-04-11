@@ -103,20 +103,29 @@ export class Adoption extends Component {
         </div>
 
         <div className="waitlist-form-container">
-          <form className="waitlist-form">
-          <div className="input-wrapper">
-            <label htmlFor="adopter-name">Add your name to the list! </label>
+          <form className="waitlist-form" autoComplete="off">
+            <label htmlFor="adopter-name">Add your name: </label>
             <input
               id="adopter-name"
+              autoComplete="off"
               type="text"
               value={this.state.value}
               onChange={this.handleChange}
             />
-            </div>
             <button type="submit" onClick={this.handleSignUp}>
               Enter
             </button>
           </form>
+        </div>
+
+        <div className="center-both">
+          <button
+            className="both-button"
+            type="submit"
+            className="adopt-button both"
+            onClick={() => this.handleAdopt('', true)}>
+            Adopt both!
+          </button>
         </div>
 
         <main className="pets-container">
@@ -151,12 +160,7 @@ export class Adoption extends Component {
               Adopt Me!
             </button>
           </section>
-          <button
-            type="submit"
-            className="adopt-button both"
-            onClick={() => this.handleAdopt('', true)}>
-            Adopt both!
-          </button>
+
           <section className="dogs-container">
             <h2 className="dogs-header">Next available dog</h2>
             <div className="dog-info">

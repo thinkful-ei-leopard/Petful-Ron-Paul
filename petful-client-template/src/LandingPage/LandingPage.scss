@@ -1,6 +1,10 @@
 @import '../styles/_breakpoints.scss';
 @import '../styles/_variables.scss';
 
+body {
+  font-family: Roboto Mono;
+}
+
 .LandingPage {
   display: flex;
   flex-direction: column;
@@ -23,7 +27,6 @@
 }
 
 p {
-  font-family: Arial;
   font-size: 1rem;
   line-height: 1.2rem;
   color: var(--main);

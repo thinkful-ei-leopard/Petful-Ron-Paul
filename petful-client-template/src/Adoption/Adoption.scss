@@ -1,6 +1,10 @@
 @import '../styles/_breakpoints.scss';
 @import '../styles/_variables.scss';
 
+body {
+  font-family: Roboto Mono;
+}
+
 .nav-bar {
   width: 100%;
   height: 50px;
@@ -68,7 +72,7 @@
 }
 
 p {
-  font-family: Arial;
+  font-family: Roboto Mono;
   font-size: 1rem;
   line-height: 1.2rem;
   color: var(--main);
@@ -121,7 +125,6 @@ li {
 
 label {
   font-family: Roboto Mono;
-  display: block;
   padding-bottom: 1rem;
 }
 
@@ -163,6 +166,18 @@ input {
   color: var(--main);
   cursor: pointer;
   background-color: rgb(191, 129, 254);
+}
+
+.both-button {
+  margin: 0 auto;
+  text-align: center;
+  display: block;
+}
+
+.center-both {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 main span {
